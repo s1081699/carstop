@@ -35,7 +35,7 @@
                 android:value="" />
         </activity>
         <activity android:name=".Menu" />
-        <activity android:name=".RentParkingLit" />
+        <activity android:name=".RentParkingLot" />
         <activity android:name=".MainActivity3" />
         <activity android:name=".RentOrder" />
         <activity android:name=".EditProfile" />

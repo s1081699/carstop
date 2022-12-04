@@ -1,112 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp">
 
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="靜宜大學"
-        android:textSize="20sp"/>
+        android:scrollbars="vertical"
+        tools:listitem="@layout/rent_parking_lot_list">
 
+    </androidx.recyclerview.widget.RecyclerView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="台中市沙鹿區台灣大道七段200號"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="月租3000NT$"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-    <Button
-        android:id="@+id/btrent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="租車" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="臺灣大學"
-        android:textSize="20sp"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="臺北市大安區羅斯福路四段1號"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="月租4000NT$"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-    <Button
-        android:id="@+id/btrent1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="租車" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="師範大學"
-        android:textSize="20sp"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="臺北市大安區和平東路一段162號"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="月租5000NT$"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-    <Button
-        android:id="@+id/btrent2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="租車" />
 </LinearLayout>

@@ -44,7 +44,7 @@ public class Menu extends AppCompatActivity {
         btnReservePark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, RentParkingLit.class);
+                Intent intent = new Intent(Menu.this, RentParkingLot.class);
                 startActivity(intent);
             }
         });
@@ -52,7 +52,7 @@ public class Menu extends AppCompatActivity {
         btnReservePark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, RentParkingLit.class);
+                Intent intent = new Intent(Menu.this, RentParkingLot.class);
                 startActivity(intent);
             }
         });
