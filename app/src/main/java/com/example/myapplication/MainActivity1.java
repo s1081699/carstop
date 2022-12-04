@@ -6,12 +6,18 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 //intent切換在切換方(ActivityMain)設計，而bundle的部分這邊會再寫東西來取得
 public class MainActivity1 extends AppCompatActivity {
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page2);
+        mAuth = FirebaseAuth.getInstance();
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
         TextView txtrecord = (TextView) findViewById(R.id.txtrecord);
@@ -19,11 +25,11 @@ public class MainActivity1 extends AppCompatActivity {
             txtrecord.setText(email);
         }
 
-        Button btreservepark = findViewById(R.id.btreservepark);
-        Button btpayment = findViewById(R.id.btpayment);
-        Button btrecord = findViewById(R.id.btrecord);
-        Button bteditInfo = findViewById(R.id.bteditInfo);
-        Button btlogout = findViewById(R.id.btlogout);
+        Button btreservepark = findViewById(R.id.btnReservePark);
+        Button btpayment = findViewById(R.id.btnPayment);
+        Button btrecord = findViewById(R.id.btnRecord);
+        Button bteditInfo = findViewById(R.id.btnEditInfo);
+        Button btlogout = findViewById(R.id.btnLogout);
         btreservepark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +61,7 @@ public class MainActivity1 extends AppCompatActivity {
         btlogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mAuth.signOut();
                 Intent intent = new Intent(MainActivity1.this,MainActivity.class);
                 startActivity(intent);
             }

@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        System.out.println("User");
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (Objects.nonNull(user) && !user.getEmail().isEmpty()) {
+            gotoNextIndent(user);
+        }
         setContentView(R.layout.activity_main);
         Button btnAction = findViewById(R.id.btnAction);
         Button btnToggleLogin = findViewById(R.id.toggleLogin);
@@ -117,10 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     displayErrorText("找不到該使用者");
                     return;
                 }
-                Intent intent = new Intent(MainActivity.this, MainActivity1.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.putExtra("email", Objects.requireNonNull(user).getEmail());
-                startActivity(intent);
+                gotoNextIndent(user);
             }
         });
 
@@ -168,10 +170,10 @@ public class MainActivity extends AppCompatActivity {
         btnAction.setText("登入");
     }
 
-    public void changeBtnThemeToInfo(Button btn) {
-        btn.setTextColor(Color.parseColor("#FFFFFF"));
-    }
-    public void changeBtnThemeToPrimary(Button btn) {
-        btn.setTextColor(321123);
+    private void gotoNextIndent(FirebaseUser user) {
+        Intent intent = new Intent(MainActivity.this, MainActivity1.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra("email", Objects.requireNonNull(user).getEmail());
+        startActivity(intent);
     }
 }

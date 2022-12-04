@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp">
 
     <Button
-        android:id="@+id/btreservepark"
+        android:id="@+id/btnAddParkingLot"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="新增車位"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/btnReservePark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="預約停車" />
+
     <Button
-        android:id="@+id/btpayment"
+        android:id="@+id/btnPayment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="繳費" />
     <Button
-        android:id="@+id/btrecord"
+        android:id="@+id/btnRecord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="租車記錄" />
     <Button
-        android:id="@+id/bteditInfo"
+        android:id="@+id/btnEditInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="修改登入資訊" />
     <Button
-        android:id="@+id/btlogout"
+        android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="登出" />
