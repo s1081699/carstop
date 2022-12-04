@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.pojo.Member;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -18,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -28,13 +30,14 @@ enum FormMode {
 public class MainActivity extends AppCompatActivity {
     Activity context = this;
     FirebaseAuth mAuth;
+    FirebaseFirestore db;
     FormMode mode = FormMode.LOGIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-        System.out.println("User");
+        db = FirebaseFirestore.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         if (Objects.nonNull(user) && !user.getEmail().isEmpty()) {
             gotoNextIndent(user);
@@ -88,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                 }
+                Member member = new Member();
+                member.setName(email.substring(0, email.indexOf("@")));
+                member.setLevel(0);
+                db.collection("Member")
+                        .document(Objects.requireNonNull(task.getResult().getUser()).getUid())
+                        .set(member);
                 login (email, password);
             }
         });

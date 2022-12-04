@@ -8,15 +8,18 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 //intent切換在切換方(ActivityMain)設計，而bundle的部分這邊會再寫東西來取得
 public class Menu extends AppCompatActivity {
     FirebaseAuth mAuth;
+    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
 
         Intent intent = getIntent();
