@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <Button
+        android:id="@+id/btreservepark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="預約停車" />
+    <Button
+        android:id="@+id/btpayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="繳費" />
+    <Button
+        android:id="@+id/btrecord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="租車記錄" />
+    <Button
+        android:id="@+id/bteditInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="修改登入資訊" />
+    <Button
+        android:id="@+id/btlogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登出" />
+    <TextView
+        android:id="@+id/txtrecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"/>
+</LinearLayout>
