@@ -53,7 +53,7 @@
             android:text="Email："
             android:textSize="24sp"/>
         <EditText
-            android:id="@+id/txtEmail"
+            android:id="@+id/textAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
