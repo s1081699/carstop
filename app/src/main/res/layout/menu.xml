@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="新增車位"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btnReservePark"

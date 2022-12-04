@@ -5,10 +5,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.Objects;
 
 //intent切換在切換方(ActivityMain)設計，而bundle的部分這邊會再寫東西來取得
 public class Menu extends AppCompatActivity {
@@ -20,14 +26,8 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.menu);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
-
-        Intent intent = getIntent();
-        String email = intent.getStringExtra("email");
         TextView txtrecord = (TextView) findViewById(R.id.txtrecord);
-        if(email!=null){
-            txtrecord.setText(email);
-        }
+        txtrecord.setText(mAuth.getCurrentUser().getEmail());
 
         Button btnAddParkingLot = findViewById(R.id.btnAddParkingLot);
         Button btnReservePark = findViewById(R.id.btnReservePark);
@@ -35,6 +35,26 @@ public class Menu extends AppCompatActivity {
         Button btnRecord = findViewById(R.id.btnRecord);
         Button btnEditInfo = findViewById(R.id.btnEditInfo);
         Button btnLogout = findViewById(R.id.btnLogout);
+
+        CollectionReference parkingLotList = db.collection("Member");
+        parkingLotList
+                .document(Objects.requireNonNull(mAuth.getUid()))
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            String levelStr = task.getResult().getData().get("level").toString();
+                            int level = Integer.parseInt(levelStr);
+                            if (level == 1) {
+                                btnAddParkingLot.setVisibility(View.VISIBLE);
+                            }
+                        } else {
+                            System.out.println("Error getting documents: " + task.getException());
+                        }
+                    }
+                });
+
+
 
         btnAddParkingLot.setOnClickListener(new View.OnClickListener() {
             @Override
