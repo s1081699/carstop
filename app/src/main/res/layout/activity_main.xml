@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/toggleLogin"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="登入"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/toggleRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="註冊"
+            />
+    </LinearLayout>
+
     <TextView
+        android:id="@+id/mainText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="輸入註冊或登入資訊："
+        android:text="請輸入登入資訊："
         android:textSize="24sp"/>
 
     <LinearLayout
@@ -21,7 +53,7 @@
             android:text="Email："
             android:textSize="24sp"/>
         <EditText
-            android:id="@+id/txtemail"
+            android:id="@+id/txtEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -29,34 +61,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="57dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密碼："
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
+
         <EditText
-            android:id="@+id/txtpassword"
+            android:id="@+id/txtPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="textPassword"
+            android:visibility="visible" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/btregister"
+        android:id="@+id/btnAction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="註冊" />
-    <Button
-        android:id="@+id/btlogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="登入" />
+        android:text="登入"
+        />
+
     <TextView
         android:id="@+id/tvfail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="顯示註冊或登入失敗"
-        android:textSize="24sp"/>
+        android:textColor="#F44336"
+        android:textSize="14sp" />
+
 </LinearLayout>

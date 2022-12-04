@@ -1,6 +1,8 @@
 package com.example.myapplication;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,66 +16,162 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.ktx.Firebase;
+
+import java.util.Objects;
 
 //intent切換在切換方(ActivityMain)設計，而bundle的部分這邊會再寫東西來取得
+enum FormMode {
+    LOGIN, REGISTER
+}
 public class MainActivity extends AppCompatActivity {
-    Activity context=this;
-    Button btlogin,btregister;
-    EditText txtemail,txtpassword;
-    TextView tvfail;
-    String email;
+    Activity context = this;
     FirebaseAuth mAuth;
+    FormMode mode = FormMode.LOGIN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button btlogin = findViewById(R.id.btlogin);
-        Button btregister = findViewById(R.id.btregister);
-        EditText txtemail = (EditText)findViewById(R.id.txtemail);
-        EditText txtpassword = (EditText)findViewById(R.id.txtpassword);
-        TextView tvfail = (TextView)findViewById(R.id.tvfail);
         mAuth = FirebaseAuth.getInstance();
+        setContentView(R.layout.activity_main);
+        Button btnAction = findViewById(R.id.btnAction);
+        Button btnToggleLogin = findViewById(R.id.toggleLogin);
+        Button btnToggleRegister = findViewById(R.id.toggleRegister);
+        toggleLogin();
+        btnAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionEvent();
+            }
+        });
 
-        btregister.setOnClickListener(new View.OnClickListener() {
+        btnToggleLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.createUserWithEmailAndPassword(txtemail.getText().toString(),txtpassword.getText().toString()).addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user=mAuth.getCurrentUser();
-                            Intent intent = new Intent(MainActivity.this,MainActivity1.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            intent.putExtra("email",email);
-                            startActivity(intent);
-                        } else {
-                            tvfail.setText("註冊失敗" + task.getException());
-                        }
-                    }
-                });
+                toggleLogin();
             }
         });
-        btlogin.setOnClickListener(new View.OnClickListener() {
+
+        btnToggleRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signInWithEmailAndPassword(txtemail.getText().toString(),txtpassword.getText().toString()).addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user=mAuth.getCurrentUser();
-                            email=user.getEmail();
-                            Intent intent = new Intent(MainActivity.this,MainActivity1.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                            intent.putExtra("email",email);
-                            startActivity(intent);
-                        } else {
-                            tvfail.setText("登入失敗" + task.getException());
-                        }
-                    }
-                });
+                toggleRegister();
             }
         });
+
+    }
+
+    //註冊
+    private void register(String email, String password) {
+        if (!isEmailAndPasswordValid(email, password)) {
+            displayErrorText("Email 或 密碼格式錯誤");
+            return;
+        }
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!task.isSuccessful()) {
+                    try {
+                        throw Objects.requireNonNull(task.getException());
+                    } catch (FirebaseAuthUserCollisionException exception) {
+                        displayErrorText("該Email已被註冊。");
+                        return;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        displayErrorText("未知的錯誤");
+                        return;
+                    }
+                }
+                login (email, password);
+            }
+        });
+
+    }
+
+    //登入
+    private void login(String email, String password) {
+        if (!isEmailAndPasswordValid(email, password)) {
+            displayErrorText("Email 或 密碼格式錯誤");
+            return;
+        }
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(context, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!task.isSuccessful()) {
+                    try {
+                        throw Objects.requireNonNull(task.getException());
+                    } catch (FirebaseAuthInvalidCredentialsException exception) {
+                        displayErrorText("帳號或密碼錯誤。");
+                        return;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        displayErrorText("未知的錯誤");
+                        return;
+                    }
+                }
+
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (Objects.isNull(user)) {
+                    displayErrorText("找不到該使用者");
+                    return;
+                }
+                Intent intent = new Intent(MainActivity.this, MainActivity1.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtra("email", Objects.requireNonNull(user).getEmail());
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    //登入或註冊失敗時顯示錯誤訊息
+    private void displayErrorText(String errorMsg) {
+        TextView tvFail = (TextView) findViewById(R.id.tvfail);
+        tvFail.setText(errorMsg);
+    }
+
+    //驗證email及密碼是否符合規範
+    private boolean isEmailAndPasswordValid(String email, String password) {
+        return Objects.nonNull(email) && Objects.nonNull(password) && !email.isEmpty() && !password.isEmpty() && password.length() >= 6;
+    }
+
+    public void actionEvent() {
+        EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
+        EditText txtPassword = (EditText) findViewById(R.id.txtPassword);
+        String email = txtEmail.getText().toString();
+        String password = txtPassword.getText().toString();
+        switch (mode) {
+            case LOGIN:
+                login(email, password);
+                break;
+            case REGISTER:
+                register(email, password);
+                break;
+        }
+    }
+
+    public void toggleRegister() {
+        mode = FormMode.REGISTER;
+        Button btnAction = findViewById(R.id.btnAction);
+        TextView mainText = findViewById(R.id.mainText);
+        mainText.setText("請輸入註冊資訊：");
+        btnAction.setText("註冊");
+    }
+
+    public void toggleLogin() {
+        mode = FormMode.LOGIN;
+        Button btnAction = findViewById(R.id.btnAction);
+        TextView mainText = findViewById(R.id.mainText);
+        mainText.setText("請輸入登入資訊：");
+        btnAction.setText("登入");
+    }
+
+    public void changeBtnThemeToInfo(Button btn) {
+        btn.setTextColor(Color.parseColor("#FFFFFF"));
+    }
+    public void changeBtnThemeToPrimary(Button btn) {
+        btn.setTextColor(321123);
     }
 }
