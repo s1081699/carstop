@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gotoNextIndent(FirebaseUser user) {
-        Intent intent = new Intent(MainActivity.this, MainActivity1.class);
+        Intent intent = new Intent(MainActivity.this, Menu.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("email", Objects.requireNonNull(user).getEmail());
         startActivity(intent);

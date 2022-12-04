@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 //intent切換在切換方(ActivityMain)設計，而bundle的部分這邊會再寫東西來取得
-public class MainActivity1 extends AppCompatActivity {
+public class Menu extends AppCompatActivity {
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.page2);
+        setContentView(R.layout.menu);
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -36,7 +36,7 @@ public class MainActivity1 extends AppCompatActivity {
         btnAddParkingLot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity1.this,AddParkingLotActivity.class);
+                Intent intent = new Intent(Menu.this,AddParkingLotActivity.class);
                 startActivity(intent);
             }
         });
@@ -44,7 +44,7 @@ public class MainActivity1 extends AppCompatActivity {
         btnReservePark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity1.this,MainActivity2.class);
+                Intent intent = new Intent(Menu.this, RentParkingLit.class);
                 startActivity(intent);
             }
         });
@@ -52,28 +52,28 @@ public class MainActivity1 extends AppCompatActivity {
         btnReservePark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity1.this,MainActivity2.class);
+                Intent intent = new Intent(Menu.this, RentParkingLit.class);
                 startActivity(intent);
             }
         });
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity1.this,MainActivity3.class);
+                Intent intent = new Intent(Menu.this,MainActivity3.class);
                 startActivity(intent);
             }
         });
         btnRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity1.this,MainActivity4.class);
+                Intent intent = new Intent(Menu.this, RentOrder.class);
                 startActivity(intent);
             }
         });
         btnEditInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity1.this,MainActivity5.class);
+                Intent intent = new Intent(Menu.this, EditProfile.class);
                 startActivity(intent);
             }
         });
@@ -81,7 +81,7 @@ public class MainActivity1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent intent = new Intent(MainActivity1.this,MainActivity.class);
+                Intent intent = new Intent(Menu.this,MainActivity.class);
                 startActivity(intent);
             }
         });

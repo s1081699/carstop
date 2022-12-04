@@ -6,16 +6,16 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 //intent切換在切換方(ActivityMain)設計，而bundle的部分這邊會再寫東西來取得
-public class MainActivity4 extends AppCompatActivity {
+public class RentOrder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.page5);
+        setContentView(R.layout.rent_order);
         Button btback = findViewById(R.id.btback);
         btback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity4.this,MainActivity1.class);
+                Intent intent = new Intent(RentOrder.this, Menu.class);
                 startActivity(intent);
             }
         });

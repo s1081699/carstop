@@ -15,7 +15,7 @@ public class MainActivity7 extends AppCompatActivity {
         btpay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity7.this,MainActivity1.class);
+                Intent intent = new Intent(MainActivity7.this, Menu.class);
                 startActivity(intent);
             }
         });

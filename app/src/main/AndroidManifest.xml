@@ -34,11 +34,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".MainActivity1" />
-        <activity android:name=".MainActivity2" />
+        <activity android:name=".Menu" />
+        <activity android:name=".RentParkingLit" />
         <activity android:name=".MainActivity3" />
-        <activity android:name=".MainActivity4" />
-        <activity android:name=".MainActivity5" />
+        <activity android:name=".RentOrder" />
+        <activity android:name=".EditProfile" />
         <activity android:name=".MainActivity6" />
         <activity android:name=".MainActivity7" />
     </application>

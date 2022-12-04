@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 //intent切換在切換方(ActivityMain)設計，而bundle的部分這邊會再寫東西來取得
-public class MainActivity5 extends AppCompatActivity {
+public class EditProfile extends AppCompatActivity {
     Activity context=this;
     Button btedit;
     EditText txtemail,txtpassword;
@@ -26,7 +26,7 @@ public class MainActivity5 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.page6);
+        setContentView(R.layout.edit_profile);
         Button btedit = findViewById(R.id.btedit);
         EditText txtemail = (EditText)findViewById(R.id.textAddress);
         EditText txtpassword = (EditText)findViewById(R.id.txtPassword);
@@ -40,7 +40,7 @@ public class MainActivity5 extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user=mAuth.getCurrentUser();
-                            Intent intent = new Intent(MainActivity5.this,MainActivity1.class);
+                            Intent intent = new Intent(EditProfile.this, Menu.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                             intent.putExtra("email",email);
                             startActivity(intent);
