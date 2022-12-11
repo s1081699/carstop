@@ -1,19 +1,11 @@
 package com.example.myapplication.pojo;
 
-public class ParkingLot {
-    private String id;
+public class Order {
     private String name;
     private String address;
     private int price;
-    private int status; // -1: 不可用, 0: 可租, 1: 已租出
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String userId;
+    private String timestamp;
 
     public String getName() {
         return name;
@@ -39,16 +31,20 @@ public class ParkingLot {
         this.price = price;
     }
 
-    public int getStatus() {
-        return status;
+    public String getUserId() {
+        return userId;
     }
 
-    /**
-     *
-     * @param status 0: 可租, 1: 已租出, -1: 不可用
-     */
-    public void setStatus(int status) {
-        this.status = status;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }
 

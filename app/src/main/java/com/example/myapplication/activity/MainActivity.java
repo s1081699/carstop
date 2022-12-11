@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.R;
 import com.example.myapplication.pojo.Member;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gotoNextIndent(FirebaseUser user) {
-        Intent intent = new Intent(MainActivity.this, Menu.class);
+        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         intent.putExtra("email", Objects.requireNonNull(user).getEmail());
         startActivity(intent);

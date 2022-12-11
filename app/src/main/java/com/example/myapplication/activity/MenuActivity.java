@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.MainActivity3;
+import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 //intent切換在切換方(ActivityMain)設計，而bundle的部分這邊會再寫東西來取得
-public class Menu extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     @Override
@@ -59,7 +61,7 @@ public class Menu extends AppCompatActivity {
         btnAddParkingLot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this,AddParkingLotActivity.class);
+                Intent intent = new Intent(MenuActivity.this, AddParkingLotActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,7 +69,7 @@ public class Menu extends AppCompatActivity {
         btnReservePark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, RentParkingLot.class);
+                Intent intent = new Intent(MenuActivity.this, RentParkingLotActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,28 +77,28 @@ public class Menu extends AppCompatActivity {
         btnReservePark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, RentParkingLot.class);
+                Intent intent = new Intent(MenuActivity.this, RentParkingLotActivity.class);
                 startActivity(intent);
             }
         });
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this,MainActivity3.class);
+                Intent intent = new Intent(MenuActivity.this, MainActivity3.class);
                 startActivity(intent);
             }
         });
         btnRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, RentOrder.class);
+                Intent intent = new Intent(MenuActivity.this, RentOrderActivity.class);
                 startActivity(intent);
             }
         });
         btnEditInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Menu.this, EditProfile.class);
+                Intent intent = new Intent(MenuActivity.this, EditProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -104,7 +106,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-                Intent intent = new Intent(Menu.this,MainActivity.class);
+                Intent intent = new Intent(MenuActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });

@@ -15,14 +15,14 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".AddParkingLotActivity"
+            android:name=".activity.AddParkingLotActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,11 +34,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".Menu" />
-        <activity android:name=".RentParkingLot" />
+        <activity android:name=".activity.MenuActivity" />
+        <activity android:name=".activity.RentParkingLotActivity" />
         <activity android:name=".MainActivity3" />
-        <activity android:name=".RentOrder" />
-        <activity android:name=".EditProfile" />
+        <activity android:name=".activity.RentOrderActivity" />
+        <activity android:name=".activity.EditProfileActivity" />
         <activity android:name=".MainActivity6" />
         <activity android:name=".MainActivity7" />
     </application>
