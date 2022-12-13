@@ -25,7 +25,8 @@
         android:id="@+id/btnPayment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="繳費" />
+        android:text="繳費"
+        android:visibility="gone" />
     <Button
         android:id="@+id/btnRecord"
         android:layout_width="match_parent"
